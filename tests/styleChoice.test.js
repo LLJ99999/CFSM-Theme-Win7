@@ -15,7 +15,7 @@ test('normalizeStyle 识别已知风格，不区分大小写并去掉空格', ()
   assert.equal(normalizeStyle('win2000'), 'win2000')
 })
 
-test('normalizeStyle 对未知值返回 win2000', () => {
+test('normalizeStyle 对未知值返回 win7', () => {
   for (const value of [undefined, null, '', 'vista', 1, {}, 'default']) {
     assert.equal(normalizeStyle(value), DEFAULT_STYLE)
   }
@@ -33,10 +33,10 @@ test('resolveStyle：访客选择优先于站点默认', () => {
   assert.equal(resolveStyle('win2000', 'xp'), 'win2000')
 })
 
-test('resolveStyle：跟随站点默认，站点值无效时为 win2000', () => {
+test('resolveStyle：跟随站点默认，站点值无效时为 win7', () => {
   assert.equal(resolveStyle('default', 'xp'), 'xp')
-  assert.equal(resolveStyle('default', 'bogus'), 'win2000')
-  assert.equal(resolveStyle('default', undefined), 'win2000')
+  assert.equal(resolveStyle('default', 'bogus'), 'win7')
+  assert.equal(resolveStyle('default', undefined), 'win7')
 })
 
 test('每种风格都有对应的 body 类名，只有 win2000 为空', () => {
@@ -53,4 +53,12 @@ test('osx 风格：识别、类名映射与站点默认', () => {
   assert.equal(STYLE_CLASSES.osx, 'style-osx')
   assert.equal(resolveStyle('default', 'osx'), 'osx')
   assert.equal(resolveStyle('xp', 'osx'), 'xp')
+})
+
+test('win7 风格：默认风格、识别与类名映射', () => {
+  assert.equal(DEFAULT_STYLE, 'win7')
+  assert.equal(normalizeStyle(' Win7 '), 'win7')
+  assert.equal(normalizeStyleChoice('win7'), 'win7')
+  assert.equal(STYLE_CLASSES.win7, 'style-win7')
+  assert.equal(resolveStyle('default', 'win2000'), 'win2000')
 })
