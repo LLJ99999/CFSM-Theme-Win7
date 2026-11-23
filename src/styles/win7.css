@@ -210,6 +210,23 @@ body.style-win7.light {
   background-attachment: fixed;
 }
 
+/* 桌面壁纸（useWallpaper 预加载成功后加 has-wallpaper 类）。
+   用固定定位的伪元素而不是 background-attachment: fixed，手机上也不会跟着滚动抖动 */
+body.style-win7.has-wallpaper::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--w7-wallpaper) center / cover no-repeat;
+  pointer-events: none;
+  animation: w7-fade-in 0.6s ease-out;
+}
+
+@keyframes w7-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* ---------- 窗口：Aero 玻璃窗框 ---------- */
 
 body.style-win7 .win {
@@ -791,6 +808,18 @@ body.style-win7 .filter-menu-item:focus-visible {
   border-color: var(--w7-hot-border);
 }
 
+body.style-win7 .popup-menu {
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+
+.popup-menu-header {
+  padding: 4px 8px 2px 32px;
+  font-weight: bold;
+  color: var(--w7-group-text, var(--text));
+  white-space: nowrap;
+}
+
 body.style-win7 .popup-menu-sep {
   margin: 3px 2px 3px 30px;
   border-top: 1px solid var(--w7-menu-gutter);
@@ -826,4 +855,65 @@ body.style-win7 .popup-menu-sep {
     border-right: 0;
     box-shadow: none;
   }
+}
+
+/* ---------- 有壁纸时：主窗口客户区变透明，卡片之间露出桌面 ---------- */
+
+body.style-win7.has-wallpaper {
+  --w7-veil: rgba(255, 255, 255, 0.18);
+  --w7-pane: rgba(255, 255, 255, 0.82);
+  --w7-chip: rgba(255, 255, 255, 0.85);
+}
+
+body.style-win7.has-wallpaper:not(.light) {
+  --w7-veil: rgba(10, 14, 20, 0.25);
+  --w7-pane: rgba(27, 31, 37, 0.84);
+  --w7-chip: rgba(27, 31, 37, 0.88);
+}
+
+body.style-win7.has-wallpaper .app-body,
+body.style-win7.has-wallpaper .tab-panel {
+  background: var(--w7-veil);
+}
+
+body.style-win7.has-wallpaper .tab-panel {
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+/* 汇总、详情页的信息框、表格等：半透明白底，保证文字看得清 */
+body.style-win7.has-wallpaper .groupbox,
+body.style-win7.has-wallpaper .listview,
+body.style-win7.has-wallpaper .tabs .tab:not(.active) {
+  background-color: var(--w7-pane);
+}
+
+body.style-win7.has-wallpaper .tab.active {
+  background: var(--w7-pane);
+}
+
+/* 装服务器卡片的分组框（亚洲、美洲…）不加底色，只给标题一个小底牌 */
+body.style-win7.has-wallpaper .groupbox:has(.server-card) {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+body.style-win7.has-wallpaper .groupbox:has(.server-card) > legend {
+  padding: 1px 6px;
+  background: var(--w7-chip);
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+/* 主窗口的玻璃只留在窗框（标题栏和四边），客户区直接透出壁纸 */
+body.style-win7.has-wallpaper .app-window::before {
+  -webkit-mask:
+    linear-gradient(#000 0 0) top / 100% 31px no-repeat,
+    linear-gradient(#000 0 0) left / 8px 100% no-repeat,
+    linear-gradient(#000 0 0) right / 8px 100% no-repeat,
+    linear-gradient(#000 0 0) bottom / 100% 8px no-repeat;
+  mask:
+    linear-gradient(#000 0 0) top / 100% 31px no-repeat,
+    linear-gradient(#000 0 0) left / 8px 100% no-repeat,
+    linear-gradient(#000 0 0) right / 8px 100% no-repeat,
+    linear-gradient(#000 0 0) bottom / 100% 8px no-repeat;
 }

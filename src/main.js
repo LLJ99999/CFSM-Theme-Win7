@@ -17,6 +17,7 @@ import { resolveDisplayMode } from './utils/displayMode'
 import { normalizeThemeOptions } from './utils/themeOptions'
 import { applyDefaultTheme } from './composables/useTheme'
 import { applyDefaultStyle, applyStoredStyle } from './composables/useStyle'
+import { applySiteWallpaper, applyStoredWallpaper } from './composables/useWallpaper'
 import { windowState } from './utils/windowState'
 import {
   clearTurnstileToken,
@@ -220,8 +221,13 @@ async function initApp() {
   applyDefaultTheme(config.preferred_theme)
   applyDefaultLanguage(config.default_language)
   // 读不到站点配置时沿用上次缓存的站点风格，避免把缓存重置成默认风格
-  if (config.load_error || config.turnstile_mismatch) applyStoredStyle()
-  else applyDefaultStyle(config.theme_options?.win2000_style)
+  if (config.load_error || config.turnstile_mismatch) {
+    applyStoredStyle()
+    applyStoredWallpaper()
+  } else {
+    applyDefaultStyle(config.theme_options?.win2000_style)
+    applySiteWallpaper(config.theme_options)
+  }
 
   if (config.turnstile_mismatch) {
     showBootError(trans().turnstileSiteKeyMismatch, trans().turnstileSiteKeyMismatchDesc)
