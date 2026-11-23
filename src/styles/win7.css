@@ -192,9 +192,6 @@ body.style-win7.light {
   --w7-menu-border: #979797;
   --w7-menu-gutter: #e2e3e3;
 
-  --graph-bg: #000000;
-  --graph-grid: #008040;
-
   --sb-track: linear-gradient(90deg, #e3e3e3 0%, #f4f4f4 100%);
   --sb-thumb: linear-gradient(90deg, #eeeeee 0%, #dcdcdc 50%, #cfcfcf 100%);
   --sb-button: #e6e6e6;
@@ -916,4 +913,52 @@ body.style-win7.has-wallpaper .app-window::before {
     linear-gradient(#000 0 0) left / 8px 100% no-repeat,
     linear-gradient(#000 0 0) right / 8px 100% no-repeat,
     linear-gradient(#000 0 0) bottom / 100% 8px no-repeat;
+}
+
+/* ---------- 详情页图表：参照 Win7 资源监视器，浅底、细网格、彩色曲线渐隐填充 ---------- */
+
+body.style-win7 {
+  --graph-bg: #1a1e24;
+  --graph-grid: #2c333d;
+  --graph-axis: #9aa5b4;
+  --graph-tip-bg: #252b33;
+  --graph-tip-text: #e6eaf0;
+  --graph-tip-border: #4a5563;
+  --graph-point-hover: #ffffff;
+  --graph-line-1: #4fa3ff;
+  --graph-line-2: #5ccf6b;
+  --graph-line-3: #ffa64d;
+  --graph-line-4: #c58af9;
+  --graph-line-5: #ff6b6b;
+  --graph-line-6: #3fd0e0;
+  --graph-line-7: #b0bec5;
+  --graph-line-8: #ffd54f;
+  --graph-fill-alpha: 0.38;
+  --graph-fill-gradient: 1;
+}
+
+body.style-win7.light {
+  --graph-bg: #ffffff;
+  --graph-grid: #e6eaf0;
+  --graph-axis: #66707e;
+  --graph-tip-bg: #ffffff;
+  --graph-tip-text: #1e2733;
+  --graph-tip-border: #a0aab8;
+  --graph-point-hover: #ffffff;
+  --graph-line-1: #1f7ae0;
+  --graph-line-2: #2e9e44;
+  --graph-line-3: #f08a00;
+  --graph-line-4: #8e44c9;
+  --graph-line-5: #e03c3c;
+  --graph-line-6: #0fa3b8;
+  --graph-line-7: #6b7785;
+  --graph-line-8: #c9a000;
+  --graph-fill-alpha: 0.3;
+}
+
+body.style-win7 .graph {
+  padding: 4px 4px 2px;
+  border: 1px solid var(--w7-group-border, #c9d2dd);
+  border-radius: 3px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
 }

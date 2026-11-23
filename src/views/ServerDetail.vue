@@ -387,6 +387,31 @@ const readCssColor = (name, fallback) => {
 
 const readGraphPalette = () => DEFAULT_GRAPH_COLORS.map((fallback, i) => readCssColor(`--graph-line-${i + 1}`, fallback))
 
+// 填充：--graph-fill-alpha 控制透明度；--graph-fill-gradient: 1 时从上往下渐隐（Win7 风格用）
+const readCssNumber = (name, fallback) => {
+  if (typeof window === 'undefined' || !document.body) return fallback
+  const value = parseFloat(window.getComputedStyle(document.body).getPropertyValue(name))
+  return Number.isFinite(value) ? value : fallback
+}
+let fillAlpha = readCssNumber('--graph-fill-alpha', 0.15)
+let fillGradient = readCssNumber('--graph-fill-gradient', 0) === 1
+const refreshFillSettings = () => {
+  fillAlpha = readCssNumber('--graph-fill-alpha', 0.15)
+  fillGradient = readCssNumber('--graph-fill-gradient', 0) === 1
+}
+const fillColor = (color) => {
+  if (!fillGradient) return hexToRgba(color, fillAlpha)
+  return (context) => {
+    const { chart } = context
+    const area = chart?.chartArea
+    if (!area) return hexToRgba(color, fillAlpha)
+    const gradient = chart.ctx.createLinearGradient(0, area.top, 0, area.bottom)
+    gradient.addColorStop(0, hexToRgba(color, fillAlpha))
+    gradient.addColorStop(1, hexToRgba(color, fillAlpha * 0.1))
+    return gradient
+  }
+}
+
 let graphPalette = readGraphPalette()
 const graphColor = (index) => graphPalette[index % GRAPH_LINE_COUNT]
 
@@ -814,7 +839,7 @@ const ds = (label, colorIndex, opts = {}) => {
   const color = graphColor(colorIndex)
   return {
     label, data: [], borderColor: color,
-    backgroundColor: opts.fill ? hexToRgba(color, 0.15) : 'transparent',
+    backgroundColor: opts.fill ? fillColor(color) : 'transparent',
     fill: !!opts.fill, tension: opts.tension ?? 0.4, borderWidth: 1.5,
     pointRadius: 0, hoverRadius: 5, spanGaps: false, ...opts, colorIndex
   }
@@ -959,6 +984,7 @@ const applyChartDefaults = (chartTheme) => {
 // 风格或明暗变化时原地换色：不能销毁重建，否则已加载的历史数据会丢失
 const applyChartTheme = () => {
   graphPalette = readGraphPalette()
+  refreshFillSettings()
   const chartTheme = getChartThemeColors()
   applyChartDefaults(chartTheme)
 
@@ -968,7 +994,7 @@ const applyChartTheme = () => {
       if (!Number.isInteger(dataset.colorIndex)) continue
       const color = graphColor(dataset.colorIndex)
       dataset.borderColor = color
-      dataset.backgroundColor = dataset.fill ? hexToRgba(color, 0.15) : 'transparent'
+      dataset.backgroundColor = dataset.fill ? fillColor(color) : 'transparent'
     }
     for (const scale of Object.values(chart.options.scales || {})) {
       if (scale.grid) scale.grid.color = chartTheme.grid
@@ -994,6 +1020,7 @@ const initCharts = () => {
   safeDestroyCharts()
 
   graphPalette = readGraphPalette()
+  refreshFillSettings()
   const chartTheme = getChartThemeColors()
 
   Chart.defaults.font.family = CHART_FONT
