@@ -1,0 +1,829 @@
+/*
+ * Windows 7（Aero）风格：body.style-win7
+ * 浅色（Aero 玻璃 + 资源管理器配色）为 body.style-win7.light，深色为 Aero 深色玻璃。
+ * 只覆盖 win2000.css 中的变量与控件外形；控件配色参考 7.css（MIT, Khang Nguyen Duy），
+ * 不使用微软的壁纸、图标和字体文件，桌面背景为 CSS 自绘。
+ */
+
+/* ---------- 深色：Aero 深色玻璃 ---------- */
+
+body.style-win7 {
+  --desktop: #0a1a33;
+  --face: #22272e;
+  --hilight: #4a5563;
+  --light: #2f3640;
+  --shadow: #12161b;
+  --dkshadow: #05070a;
+  --window: #1b1f25;
+  --window-alt: #222831;
+  --text: #e9eef5;
+  --text-muted: #b3bdc9;
+  --gray-text: #7d8896;
+  --gray-text-shadow: transparent;
+  --title-text: #ffffff;
+  --title-off-text: #aab6c6;
+  --select-bg: #2a6fc4;
+  --select-text: #ffffff;
+  --bar: #3fbf4c;
+  --bar-hot: #e0453a;
+  --online: #4fd45c;
+  --offline: #ff6a5a;
+  --tip-bg: #f4f6fb;
+  --tip-text: #3c3c3c;
+  --link: #7fbaff;
+  --link-hover: #b9d9ff;
+  --row-line: #2a3039;
+  --dither-a: #2f3640;
+  --dither-b: #22272e;
+  --overlay: rgba(0, 0, 0, 0.4);
+
+  --accent-green: #4fd45c;
+  --accent-blue: #6fb0ff;
+  --accent-yellow: #ffc43d;
+  --accent-red: #ff6a5a;
+  --accent-cyan: #4fd0e8;
+  --accent-purple: #b79cff;
+
+  --w7-font: "Segoe UI", SegoeUI, "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans", sans-serif;
+  /* 自绘的 Win7 风格桌面：深蓝底 + 中心光晕 + 斜向光带 */
+  --w7-desktop:
+    radial-gradient(ellipse 55% 45% at 50% 42%, rgba(120, 200, 255, 0.35), transparent 70%),
+    linear-gradient(115deg, transparent 38%, rgba(140, 220, 255, 0.10) 44%, transparent 52%),
+    linear-gradient(125deg, transparent 50%, rgba(160, 230, 255, 0.08) 56%, transparent 62%),
+    radial-gradient(ellipse 120% 80% at 50% 120%, #04101f 0%, transparent 60%),
+    linear-gradient(180deg, #0b2a55 0%, #0a3d78 45%, #062248 100%);
+  /* 窗框玻璃 */
+  --w7-frame: rgba(30, 48, 74, 0.82);
+  --w7-frame-off: rgba(52, 60, 72, 0.78);
+  --w7-frame-sheen: linear-gradient(transparent 20%, rgba(255, 255, 255, 0.18) 40%, transparent 41%), linear-gradient(90deg, rgba(255, 255, 255, 0.16), rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.10));
+  --w7-frame-edge: rgba(0, 0, 0, 0.75);
+  --w7-frame-inner: rgba(255, 255, 255, 0.28);
+  --w7-title-glow: 0 0 8px rgba(0, 0, 0, 0.9), 0 0 4px rgba(0, 0, 0, 0.8);
+  --w7-title-color: #ffffff;
+  --w7-client-edge: rgba(0, 0, 0, 0.7);
+  /* 按钮 */
+  --w7-btn: linear-gradient(#4a525d 45%, #3e454f 45%, #343a43);
+  --w7-btn-border: #0f1318;
+  --w7-btn-inner: rgba(255, 255, 255, 0.14);
+  --w7-btn-hover: linear-gradient(#3b6ea3 45%, #2c5f96 45%, #24507f);
+  --w7-btn-hover-border: #6fb0ff;
+  --w7-btn-pressed: linear-gradient(#1d4a7a, #2a5f97 30% 50%, #1b4f86 50%, #2b6aa8);
+  --w7-btn-text: #f0f4f8;
+  --w7-focus: #34deff;
+  /* 资源管理器命令栏 */
+  --w7-command: linear-gradient(180deg, #2f3a48 0%, #263140 50%, #1f2935 51%, #222d3a 100%);
+  --w7-command-line: #0e131a;
+  --w7-hot: linear-gradient(180deg, rgba(120, 180, 255, 0.28), rgba(80, 140, 230, 0.18));
+  --w7-hot-border: rgba(140, 190, 255, 0.55);
+  --w7-sel: linear-gradient(180deg, rgba(100, 160, 240, 0.45), rgba(60, 120, 210, 0.38));
+  --w7-sel-border: rgba(130, 180, 255, 0.8);
+  /* 分组框、选项卡 */
+  --w7-group-border: #3a4451;
+  --w7-group-text: #9fd0ff;
+  --w7-tab: linear-gradient(180deg, #3a434e 0%, #2d343d 100%);
+  --w7-tab-border: #4a5563;
+  --w7-tab-active: var(--face);
+  /* 进度条 */
+  --w7-track: linear-gradient(180deg, #1a1e24, #262c34 50%, #1e2329 51%, #23292f);
+  --w7-track-border: #0b0e12;
+  --w7-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.25) 45%, rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 0.15));
+  --w7-fill: #22b02f;
+  --w7-fill-hot: #d6262b;
+  --w7-fill-off: #6d7681;
+  /* 列表 */
+  --w7-head: linear-gradient(180deg, #303843 0%, #29303a 100%);
+  --w7-head-line: #3e4753;
+  /* 状态栏、菜单、提示框 */
+  --w7-status: linear-gradient(180deg, #2a323c 0%, #222931 100%);
+  --w7-menu: #262c34;
+  --w7-menu-border: #0e1217;
+  --w7-menu-gutter: #2e3540;
+  --w7-tip: linear-gradient(180deg, #ffffff 0%, #e4e5f0 100%);
+
+  --sb-track: #1c2026;
+  --sb-thumb: linear-gradient(90deg, #4a5563 0%, #3b4450 100%);
+  --sb-button: #2f3640;
+  --sb-border: #0f1318;
+  --sb-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --sb-radius: 2px;
+
+  font-family: var(--w7-font);
+}
+
+/* ---------- 浅色：Aero ---------- */
+
+body.style-win7.light {
+  --desktop: #1c6fb8;
+  --face: #f0f0f0;
+  --hilight: #ffffff;
+  --light: #f4f4f4;
+  --shadow: #a0a0a0;
+  --dkshadow: #6d6d6d;
+  --window: #ffffff;
+  --window-alt: #f7f9fc;
+  --text: #000000;
+  --text-muted: #444444;
+  --gray-text: #8a8a8a;
+  --title-text: #000000;
+  --title-off-text: #4d4d4d;
+  --select-bg: #cce8ff;
+  --select-text: #000000;
+  --bar: #06b025;
+  --bar-hot: #da2626;
+  --online: #1a9e2a;
+  --offline: #d42020;
+  --tip-bg: #f4f6fb;
+  --tip-text: #3c3c3c;
+  --link: #0066cc;
+  --link-hover: #3399ff;
+  --row-line: #eef2f7;
+  --dither-a: #ffffff;
+  --dither-b: #f0f0f0;
+  --overlay: rgba(0, 0, 0, 0.18);
+
+  --accent-green: #1a9e2a;
+  --accent-blue: #1e6fd9;
+  --accent-yellow: #c98a00;
+  --accent-red: #d42020;
+  --accent-cyan: #0a8fb0;
+  --accent-purple: #7a4cc4;
+
+  --w7-desktop:
+    radial-gradient(ellipse 55% 45% at 50% 42%, rgba(200, 240, 255, 0.55), transparent 70%),
+    linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.16) 44%, transparent 52%),
+    linear-gradient(125deg, transparent 50%, rgba(255, 255, 255, 0.12) 56%, transparent 62%),
+    radial-gradient(ellipse 120% 80% at 50% 120%, #0a3a78 0%, transparent 60%),
+    linear-gradient(180deg, #1a5fa8 0%, #2a8ad6 45%, #145094 100%);
+  --w7-frame: rgba(69, 128, 196, 0.62);
+  --w7-frame-off: rgba(150, 170, 196, 0.6);
+  --w7-frame-sheen: linear-gradient(transparent 20%, rgba(255, 255, 255, 0.7) 40%, transparent 41%), linear-gradient(90deg, rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.2));
+  --w7-frame-edge: rgba(0, 0, 0, 0.7);
+  --w7-frame-inner: rgba(255, 255, 255, 0.8);
+  --w7-title-glow: 0 0 10px #ffffff, 0 0 8px #ffffff, 0 0 6px #ffffff, 0 0 4px #ffffff;
+  --w7-title-color: #000000;
+  --w7-client-edge: rgba(0, 0, 0, 0.55);
+  --w7-btn: linear-gradient(#f2f2f2 45%, #ebebeb 45%, #cfcfcf);
+  --w7-btn-border: #8e8f8f;
+  --w7-btn-inner: rgba(255, 255, 255, 0.8);
+  --w7-btn-hover: linear-gradient(#eaf6fd 45%, #bee6fd 45%, #a7d9f5);
+  --w7-btn-hover-border: #3c7fb1;
+  --w7-btn-pressed: linear-gradient(#e5f4fc, #c4e5f6 30% 50%, #98d1ef 50%, #68b3db);
+  --w7-btn-text: #222222;
+  --w7-command: linear-gradient(180deg, #fafcfe 0%, #e8eff8 50%, #dce6f4 51%, #e2ebf6 100%);
+  --w7-command-line: #a0afc3;
+  --w7-hot: linear-gradient(180deg, #fafdff, #e3f1fd);
+  --w7-hot-border: #a7cef1;
+  --w7-sel: linear-gradient(180deg, #e3f1fd, #c4e1fb);
+  --w7-sel-border: #7da2ce;
+  --w7-group-border: #d5dfe5;
+  --w7-group-text: #1e395b;
+  --w7-tab: linear-gradient(180deg, #fdfdfd 0%, #f0f0f0 50%, #e6e6e6 51%, #ececec 100%);
+  --w7-tab-border: #8e8f8f;
+  --w7-tab-active: #ffffff;
+  --w7-track: linear-gradient(180deg, #f3f3f3, #fcfcfc 20%, #dbdbdb 45%, #cacaca 46%, #d5d5d5);
+  --w7-track-border: #8e8f8f;
+  --w7-fill: #06b025;
+  --w7-fill-hot: #da2626;
+  --w7-fill-off: #a8a8a8;
+  --w7-head: linear-gradient(180deg, #ffffff 0%, #f7f8fa 50%, #f1f2f4 51%, #f3f4f6 100%);
+  --w7-head-line: #d5d5d5;
+  --w7-status: linear-gradient(180deg, #f5f8fc 0%, #e4ebf4 100%);
+  --w7-menu: #f0f0f0;
+  --w7-menu-border: #979797;
+  --w7-menu-gutter: #e2e3e3;
+
+  --graph-bg: #000000;
+  --graph-grid: #008040;
+
+  --sb-track: linear-gradient(90deg, #e3e3e3 0%, #f4f4f4 100%);
+  --sb-thumb: linear-gradient(90deg, #eeeeee 0%, #dcdcdc 50%, #cfcfcf 100%);
+  --sb-button: #e6e6e6;
+  --sb-border: #8e8f8f;
+  --sb-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+/* ---------- 桌面 ---------- */
+
+/* :where 把优先级降到 0：后台配置的背景图仍然优先 */
+:where(body.style-win7) {
+  background-image: var(--w7-desktop);
+  background-attachment: fixed;
+}
+
+/* ---------- 窗口：Aero 玻璃窗框 ---------- */
+
+body.style-win7 .win {
+  position: relative;
+  isolation: isolate;
+  padding: 0 7px 7px;
+  background: transparent;
+  border: 1px solid var(--w7-frame-edge);
+  border-radius: 7px;
+  box-shadow: 0 0 0 1px var(--w7-frame-inner) inset, 0 8px 26px rgba(0, 0, 0, 0.5);
+}
+
+/* 玻璃层：半透明蓝 + 背景模糊 + 斜向反光 */
+body.style-win7 .win::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 6px;
+  background: var(--w7-frame-sheen), var(--w7-frame);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  backdrop-filter: blur(8px) saturate(140%);
+  box-shadow: inset 0 0 0 1px var(--w7-frame-inner);
+  pointer-events: none;
+}
+
+body.style-win7 .server-card.offline::before,
+body.style-win7 .win:has(> .title-bar.inactive)::before {
+  background: var(--w7-frame-sheen), var(--w7-frame-off);
+}
+
+body.style-win7 .app-window {
+  gap: 0;
+}
+
+/* 客户区：标题栏以下的内容用深色细边框框起来 */
+body.style-win7 .app-body {
+  background: var(--face);
+  border: 1px solid var(--w7-client-edge);
+  border-bottom: 0;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+/* ---------- 标题栏：透明，文字带白色光晕，右侧是装饰性的最小化/最大化/关闭 ---------- */
+
+body.style-win7 .title-bar {
+  height: 30px;
+  margin: 0 -2px;
+  padding: 0 0 0 4px;
+  gap: 6px;
+  align-items: center;
+  background: transparent;
+  color: var(--w7-title-color);
+}
+
+body.style-win7 .title-bar.inactive {
+  background: transparent;
+  color: var(--w7-title-color);
+  opacity: 0.85;
+}
+
+/* 主窗口标题栏吸顶时背后没有玻璃，补一层同色玻璃 */
+body.style-win7 .app-window > .title-bar {
+  margin: 0 -7px;
+  padding: 0 7px 0 9px;
+  border-radius: 6px 6px 0 0;
+  background: var(--w7-frame-sheen), var(--w7-frame);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  backdrop-filter: blur(8px) saturate(140%);
+}
+
+body.style-win7 .title-bar-text {
+  font-family: var(--w7-font);
+  font-size: 12px;
+  font-weight: normal;
+  color: var(--w7-title-color);
+  text-shadow: var(--w7-title-glow);
+}
+
+body.style-win7 .app-window h1.title-bar-text {
+  font-size: 13px;
+  font-weight: normal;
+}
+
+body.style-win7 .title-bar.inactive .title-bar-text {
+  text-shadow: var(--w7-title-glow);
+}
+
+/* 装饰用的窗口按钮（不可点击） */
+body.style-win7 .title-bar::after {
+  content: "";
+  flex: none;
+  align-self: flex-start;
+  width: 96px;
+  height: 20px;
+  margin-left: 4px;
+  background: url("../assets/win7-caption.svg") no-repeat;
+  pointer-events: none;
+}
+
+body.style-win7 .server-card .title-bar {
+  height: 26px;
+}
+
+body.style-win7 .server-card .title-bar::after {
+  width: 67px;
+  height: 14px;
+  background-size: 67px 14px;
+}
+
+body.style-win7 .dialog > .title-bar::after {
+  width: 44px;
+  background-position: -52px 0;
+}
+
+/* 有自己关闭按钮的对话框不再画装饰按钮 */
+body.style-win7 .dialog > .title-bar:has(.title-btn)::after {
+  content: none;
+}
+
+/* 标题栏上的功能按钮：玻璃小按钮 */
+body.style-win7 .title-btn {
+  height: 18px;
+  min-width: 24px;
+  padding: 0 6px;
+  color: var(--w7-title-color);
+  text-shadow: var(--w7-title-glow);
+  background: linear-gradient(rgba(255, 255, 255, 0.5) 45%, rgba(255, 255, 255, 0.2) 45%, rgba(255, 255, 255, 0.3));
+  border: 1px solid rgba(0, 0, 0, 0.45);
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+}
+
+body.style-win7 .title-btn:hover {
+  color: var(--w7-title-color);
+  background: linear-gradient(rgba(190, 230, 253, 0.9) 45%, rgba(130, 200, 245, 0.75) 45%, rgba(150, 215, 250, 0.85));
+  border-color: rgba(0, 40, 90, 0.6);
+}
+
+body.style-win7 .title-btn:active {
+  border-color: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(rgba(150, 200, 235, 0.9), rgba(90, 160, 215, 0.9));
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+body.style-win7 .title-btn svg {
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
+}
+
+body.style-win7:not(.light) .title-btn svg {
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.9));
+}
+
+/* 对话框关闭按钮：红色 */
+body.style-win7 .dialog .title-btn {
+  min-width: 44px;
+  color: #ffffff;
+  text-shadow: 0 0 3px #5a1a10;
+  background: linear-gradient(#e8a493 0%, #d1735e 45%, #c2462a 50%, #d97a4c 100%);
+  border-color: rgba(0, 0, 0, 0.55);
+  border-radius: 0 0 4px 4px;
+  align-self: flex-start;
+}
+
+body.style-win7 .dialog .title-btn:hover {
+  background: linear-gradient(#f5bfae 0%, #e8836c 45%, #d8462a 50%, #f08a5a 100%);
+}
+
+/* ---------- 按钮 ---------- */
+
+body.style-win7 .btn {
+  min-height: 23px;
+  min-width: 75px;
+  padding: 0 12px;
+  color: var(--w7-btn-text);
+  background: var(--w7-btn);
+  border: 1px solid var(--w7-btn-border);
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--w7-btn-inner);
+  font-family: var(--w7-font);
+  transition: border-color 0.3s;
+}
+
+body.style-win7 .btn:hover:not(:disabled) {
+  background: var(--w7-btn-hover);
+  border-color: var(--w7-btn-hover-border);
+}
+
+body.style-win7 .btn:active:not(:disabled) {
+  padding: 0 12px;
+  background: var(--w7-btn-pressed);
+  border-color: #6d91ab;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.2), inset -1px 1px 0 rgba(0, 0, 0, 0.07);
+}
+
+/* 默认按钮：Win7 的蓝色"呼吸"光晕 */
+body.style-win7 .btn.default {
+  outline: 0;
+  border-color: #5586a3;
+  background: var(--w7-btn-hover);
+  animation: w7-pulse 1s ease infinite alternate;
+}
+
+@keyframes w7-pulse {
+  from { box-shadow: inset 0 0 3px 1px rgba(52, 222, 255, 0.87); }
+  to { box-shadow: inset 0 0 1px 1px rgba(52, 222, 255, 0.87); }
+}
+
+body.style-win7 .btn:disabled {
+  color: #838383;
+  background: #f4f4f4;
+  border-color: #adb2b5;
+  text-shadow: none;
+}
+
+body.style-win7:not(.light) .btn:disabled {
+  color: #6d7681;
+  background: #2a3038;
+  border-color: #3a424c;
+}
+
+body.style-win7 .btn:focus-visible,
+body.style-win7 .tool-btn:focus-visible,
+body.style-win7 .tab:focus-visible {
+  outline: 1px dotted var(--text);
+  outline-offset: -4px;
+}
+
+/* ---------- 工具栏：资源管理器的命令栏 ---------- */
+
+body.style-win7 .toolbar {
+  gap: 2px;
+  padding: 3px 6px;
+  background: var(--w7-command);
+  border-bottom: 1px solid var(--w7-command-line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+body.style-win7:not(.light) .toolbar {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+body.style-win7 .tool-btn {
+  height: 24px;
+  padding: 0 8px;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+
+body.style-win7 .tool-btn:hover:not(.active):not(.disabled) {
+  background: var(--w7-hot);
+  border-color: var(--w7-hot-border);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+body.style-win7 .tool-btn:active:not(.disabled),
+body.style-win7 .tool-btn.active {
+  background: var(--w7-sel);
+  border-color: var(--w7-sel-border);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+body.style-win7 .tool-btn.disabled {
+  color: var(--gray-text);
+  text-shadow: none;
+}
+
+body.style-win7 .tool-sep {
+  width: 2px;
+  margin: 3px 4px;
+  border-left: 1px solid var(--w7-command-line);
+  border-right: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+body.style-win7:not(.light) .tool-sep {
+  border-right-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ---------- 分组框与选项卡 ---------- */
+
+body.style-win7 .groupbox {
+  border: 1px solid var(--w7-group-border);
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--hilight);
+}
+
+body.style-win7:not(.light) .groupbox {
+  box-shadow: none;
+}
+
+body.style-win7 .groupbox > legend {
+  color: var(--w7-group-text);
+  font-weight: normal;
+}
+
+body.style-win7 .tab {
+  color: var(--text);
+  background: var(--w7-tab);
+  border: 1px solid var(--w7-tab-border);
+  border-bottom-color: transparent;
+  border-radius: 2px 2px 0 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+body.style-win7:not(.light) .tab {
+  box-shadow: none;
+}
+
+body.style-win7 .tab:hover:not(.active) {
+  background: var(--w7-btn-hover);
+  border-color: var(--w7-btn-hover-border);
+  border-bottom-color: transparent;
+}
+
+body.style-win7 .tab.active {
+  background: var(--w7-tab-active);
+  box-shadow: none;
+}
+
+body.style-win7 .tab-panel {
+  background: var(--w7-tab-active);
+  border: 1px solid var(--w7-tab-border);
+  box-shadow: none;
+}
+
+/* ---------- 进度条：绿色玻璃 ---------- */
+
+body.style-win7 .progress {
+  padding: 0;
+  background: var(--w7-track);
+  border: 1px solid var(--w7-track-border);
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(243, 243, 243, 0.4);
+  overflow: hidden;
+}
+
+body.style-win7 .progress-fill {
+  position: relative;
+  background: var(--w7-gloss), var(--w7-fill);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+/* 流光：Win7 进度条的白色高光从左往右扫过 */
+body.style-win7 .progress-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent 40%);
+  animation: w7-progress 3s linear infinite;
+}
+
+@keyframes w7-progress {
+  0% { transform: translateX(-40%); }
+  60%, 100% { transform: translateX(100%); }
+}
+
+body.style-win7 .progress-fill.hot {
+  background: var(--w7-gloss), var(--w7-fill-hot);
+}
+
+body.style-win7 .progress-fill.unlimited {
+  background: var(--w7-gloss), var(--w7-fill-off);
+}
+
+body.style-win7 .progress-fill.unlimited::after {
+  content: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.style-win7 .progress-fill::after,
+  body.style-win7 .btn.default {
+    animation: none;
+  }
+}
+
+/* ---------- 列表：资源管理器详细信息视图 ---------- */
+
+body.style-win7 .listview .col-head {
+  height: 24px;
+  color: #4c607a;
+  background: var(--w7-head);
+  border: 0;
+  border-right: 1px solid var(--w7-head-line);
+  border-bottom: 1px solid var(--w7-head-line);
+  box-shadow: none;
+  font-weight: normal;
+}
+
+body.style-win7:not(.light) .listview .col-head {
+  color: var(--text-muted);
+}
+
+body.style-win7 .listview td {
+  border-bottom: 1px solid transparent;
+}
+
+body.style-win7 .listview tbody tr:hover,
+body.style-win7 .listview tbody tr:focus-visible {
+  color: var(--text);
+  background: var(--w7-hot);
+  outline: 1px solid var(--w7-hot-border);
+  outline-offset: -1px;
+}
+
+/* ---------- 状态栏 ---------- */
+
+body.style-win7 .status-bar {
+  min-height: 23px;
+  padding: 0 6px;
+  color: var(--text);
+  background: var(--w7-status);
+  border: 1px solid var(--w7-client-edge);
+  border-top: 1px solid var(--w7-command-line);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+body.style-win7 .status-field {
+  border: 0;
+  border-right: 1px solid var(--w7-command-line);
+  box-shadow: none;
+}
+
+body.style-win7 .status-field:last-child {
+  border-right: 0;
+}
+
+/* ---------- 凹凸区域、下拉框、徽章 ---------- */
+
+body.style-win7 .sunken,
+body.style-win7 .thin-sunken {
+  border: 1px solid;
+  border-color: #abadb3 #e2e3ea #e3e9ef #dbdfe6;
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+body.style-win7:not(.light) .sunken,
+body.style-win7:not(.light) .thin-sunken {
+  border-color: #0f1318 #3a424c #3a424c #2a3038;
+}
+
+body.style-win7 .raised,
+body.style-win7 .thin-raised {
+  background: var(--w7-btn);
+  border: 1px solid var(--w7-btn-border);
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--w7-btn-inner);
+}
+
+body.style-win7 .select {
+  color: var(--w7-btn-text);
+  background: var(--w7-btn);
+  border: 1px solid var(--w7-btn-border);
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--w7-btn-inner);
+}
+
+body.style-win7 .badge {
+  color: var(--w7-btn-text);
+  background: var(--w7-btn);
+  border: 1px solid var(--w7-btn-border);
+  border-radius: 3px;
+  padding: 0 4px;
+}
+
+/* ---------- 提示框：白到淡紫灰的渐变 ---------- */
+
+body.style-win7 [data-tooltip]:hover::after,
+body.style-win7 .tooltip-anchor .tooltip-box {
+  color: #3c3c3c;
+  background: var(--w7-tip);
+  border: 1px solid #767676;
+  border-radius: 2px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- 服务器卡片：小号 Aero 窗口 ---------- */
+
+body.style-win7 .server-card {
+  padding: 0 6px 6px;
+  gap: 0;
+  box-shadow: 0 0 0 1px var(--w7-frame-inner) inset, 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+
+body.style-win7 .server-card > .card-body {
+  flex: 1;
+  padding: 7px 6px 6px;
+  background: var(--face);
+  border: 1px solid var(--w7-client-edge);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+body.style-win7 .card-status {
+  height: 16px;
+  color: var(--w7-title-color);
+  text-shadow: var(--w7-title-glow);
+  background: linear-gradient(rgba(255, 255, 255, 0.45) 45%, rgba(255, 255, 255, 0.18) 45%, rgba(255, 255, 255, 0.28));
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+}
+
+/* ---------- 对话框 ---------- */
+
+body.style-win7 .dialog {
+  animation: w7-dialog-in 0.18s ease-out;
+}
+
+body.style-win7 .dialog-body,
+body.style-win7 .dialog-buttons {
+  background: var(--face);
+  border-left: 1px solid var(--w7-client-edge);
+  border-right: 1px solid var(--w7-client-edge);
+}
+
+body.style-win7 .dialog-body {
+  border-top: 1px solid var(--w7-client-edge);
+  background: var(--window);
+}
+
+/* Win7 对话框底部的按钮区是浅灰色条 */
+body.style-win7 .dialog-buttons {
+  justify-content: flex-end;
+  padding: 10px 12px;
+  border-top: 1px solid #dfdfdf;
+  border-bottom: 1px solid var(--w7-client-edge);
+}
+
+body.style-win7:not(.light) .dialog-buttons {
+  border-top-color: var(--w7-group-border);
+}
+
+@keyframes w7-dialog-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- 弹出菜单：左侧带图标槽的 Win7 菜单 ---------- */
+
+body.style-win7 .filter-menu,
+body.style-win7 .popup-menu {
+  padding: 2px;
+  color: var(--text);
+  background:
+    linear-gradient(90deg, transparent 26px, var(--w7-menu-gutter) 26px 27px, var(--hilight) 27px 28px, transparent 28px),
+    var(--w7-menu);
+  border: 1px solid var(--w7-menu-border);
+  border-radius: 0;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.style-win7:not(.light) .filter-menu,
+body.style-win7:not(.light) .popup-menu {
+  background:
+    linear-gradient(90deg, transparent 26px, var(--w7-menu-gutter) 26px 27px, transparent 27px),
+    var(--w7-menu);
+}
+
+body.style-win7 .filter-menu::before,
+body.style-win7 .popup-menu::before {
+  content: none;
+}
+
+body.style-win7 .popup-menu-item,
+body.style-win7 .filter-menu-item {
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+
+body.style-win7 .popup-menu-item:hover,
+body.style-win7 .popup-menu-item:focus-visible,
+body.style-win7 .filter-menu-item:hover,
+body.style-win7 .filter-menu-item.active,
+body.style-win7 .filter-menu-item:focus-visible {
+  color: var(--text);
+  background: var(--w7-hot);
+  border-color: var(--w7-hot-border);
+}
+
+body.style-win7 .popup-menu-sep {
+  margin: 3px 2px 3px 30px;
+  border-top: 1px solid var(--w7-menu-gutter);
+  border-bottom: 1px solid var(--hilight);
+}
+
+/* ---------- 手机：主窗口铺满屏幕，去掉窗框 ---------- */
+
+@media (max-width: 768px) {
+  body.style-win7 .app-window {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  body.style-win7 .app-window::before {
+    border-radius: 0;
+  }
+
+  body.style-win7 .app-window > .title-bar {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  body.style-win7 .app-window > .title-bar::after {
+    display: none;
+  }
+
+  body.style-win7 .app-body,
+  body.style-win7 .status-bar {
+    border-left: 0;
+    border-right: 0;
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "cfsm-theme-win7",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A Windows 7 Aero style theme for CF-Server-Monitor",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:github-page": "node scripts/build-github-page.js",
+    "preview": "vite preview",
+    "test": "node --test",
+    "mock": "node scripts/mock-worker/mock-worker.mjs"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.0",
+    "leaflet": "^1.9.4",
+    "vue": "^3.4.0",
+    "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.0",
+    "vite": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
